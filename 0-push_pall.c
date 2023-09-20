@@ -1,50 +1,57 @@
 #include"monty.h"
 #define STACK_SIZE 1024
+stack_t *stack = NULL; 
 /**
  * push - inserts a value into the stack
- * @val: the value
+ * @stack: the stack
+ * @line_no: value
  */
-void push(int val)
+void push(stack_t **stack, unsigned int line_no)
 {
-	int stack[STACK_SIZE];
-	int stack_ptr = 0;
-
-	if (stack_ptr == STACK_SIZE)
-	{
-		printf("Stack overflow\n");
-		exit(EXIT_FAILURE);
-	}
-	else if (val == NULL)
+	stack_t *newnode = malloc(sizeof(stack_t));
+	if (newnode == NULL)
 	{
 		fprintf(stderr, "L<line_number>: usage: push integer\n");
+		exit(EXIT_FAILURE);
 	}
-	stack[stack_ptr++] = val;
+	newnode->n = line_no;
+	newnode->prev = NULL;
+	newnode->next = *stack;
+	if (*stack != NULL)
+	{
+		(*stack)->prev = newnode;
+	}
+	*stack = newnode;
 }
 /**
  * pall - retriever
+ * @stack: the stack
+ * @line_no: val
  */
-void pall(void)
+void pall(stack_t **stack, unsigned int line_no)
 {
-	if (stack_ptr == 0)
+	stack_t *current = *stack;
+	(void) line_no;
+	while (current != NULL)
 	{
-		return;
-	}
-	for (i = stack_ptr - 1; i >= 0; i--)
-	{
-		printf("%d\n", stack[i]);
+		printf("%d\n", current->n);
+		current = current->next;
 	}
 }
 /**
- *
+ * pint - checks for the top element
+ * @stack: the stack
+ * @line_no: val
  */
-void pint(void)
+void pint(stack_t **stack, unsigned int line_no)
 {
-	if (stack_pointer == 0)
+	(void) line_no;
+	if (*stack == NULL)
 	{
 		fprintf(stderr, "L<line_number>: can't pint, stack empty\n");
 		exit(EXIT_FAILURE);
 	}
-	printf("%d\n", stack[stack_ptr - 1]);
+	printf("%d\n", (*stack)->n);
 }
 /**
  * main - launcher
@@ -52,10 +59,30 @@ void pint(void)
  */
 int main(void)
 {
-	push(5);
-	push(10);
-	push(15);
-	pall();
-	pint();
-	return (0);
+	unsigned int line_no;
+	int i;
+	instruction_t instruction_set[] = {
+		{"push", push},
+		{"pall", pall},
+		{"pint", pint},
+		{NULL, NULL}
+	};
+	line_no = 1;
+	for (i = 0; instruction_set[i].opcode != NULL; i++)
+	{
+		if (strcmp(instruction_set[i].opcode, "push") == 0)
+		{
+			instruction_set[i].f(&stack, line_no);
+		}
+		else if (strcmp(instruction_set[i].opcode, "pall") == 0)
+		{
+			instruction_set[i].f(&stack, line_no);
+		}
+		else if (strcmp(instruction_set[i].opcode, "pint") == 0)
+		{
+			instruction_set[i].f(&stack, line_no);
+		}
+		line_no++;
+	}
+	return 0;
 }
