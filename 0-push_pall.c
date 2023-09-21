@@ -128,42 +128,43 @@ int main(void)
 }*/
 int main(void)
 {
-	stack_t *stack = NULL;
+	stack_t *temp, *stack = NULL;
     unsigned int line_no = 1;
 
-    /* Example usage of the opcodes */
+        push(&stack, 10);
 
-    /* Push 10 onto stack */
-    push(&stack, 10);
-
-    /* Push 5 onto stack */
     push(&stack, 5);
 
-    /* Add the top two elements of the stack */
     add(&stack, line_no++);
 
-    /* Print the result */
     printf("Result: %d\n", stack->n);
 
-    /* Swap the top two elements of the stack */
     swap(&stack, line_no++);
 
-    /* Print the swapped elements */
     printf("Swapped elements: %d and %d\n", stack->n, stack->next->n);
 
-    /* Divide the top element by the second top element */
     div_me(&stack, line_no++);
 
-    /* Print the division result */
     printf("Division result: %d\n", stack->n);
 
-    /* Perform modulus operation */
     mod(&stack, line_no++);
 
-    /* Print the final result */
     printf("Final result: %d\n", stack->n);
+    nop(&stack, line_no++);
+    rotl(&stack, line_no++);
+    printf("Rotated stack: ");
+    temp = stack;
+    while (temp != NULL)
+    {
+        printf("%d ", temp->n);
+        temp = temp->next;
+    }
+    printf("\n");
+    mul(&stack, line_no++);
+    printf("Multiplication result: %d\n", stack->n);
+    sub(&stack, line_no++);
+    printf("Subtraction result: %d\n", stack->n);
 
-    /* Pop remaining elements from the stack */
     while (stack != NULL)
     {
         pop(&stack, line_no++);
