@@ -53,7 +53,7 @@ void pint(stack_t **stack, unsigned int line_no)
 	}
 	printf("%d\n", (*stack)->n);
 }
-void pop(stack_t **stack, unsigned int line_no)
+/*void pop(stack_t **stack, unsigned int line_no)
 {
         stack_t *temp;
 
@@ -72,7 +72,7 @@ void pop(stack_t **stack, unsigned int line_no)
     }
 
     free(temp);
-}
+}*/
 /**
  * main - launcher
  * Return: 0

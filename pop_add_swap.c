@@ -3,7 +3,7 @@
  * pop - deletes an elements from the stack
  * @stack: the stack
  * @line_no: value
- *
+ */
 void pop(stack_t **stack, unsigned int line_no)
 {
 	stack_t *temp;
@@ -23,12 +23,12 @@ void pop(stack_t **stack, unsigned int line_no)
     }
 
     free(temp);
-*}*/
-**
+}
+/**
  * add - adds an element to the stack
  * @stack: ..
  * @line_no: ..
- *
+ */
 void add(stack_t **stack, unsigned int line_no)
 {
     if (*stack == NULL || (*stack)->next == NULL)
