@@ -15,7 +15,7 @@ void pop(stack_t **stack, unsigned int line_no)
     }
 
     temp = *stack;
-    *stack = (*stack)->next;
+    *stack = temp->next;
 
     if (*stack != NULL)
     {
@@ -80,5 +80,22 @@ void div_me(stack_t **stack, unsigned int line_no)
     }
 
     (*stack)->next->n /= (*stack)->n;
+    pop(stack, line_no);
+}
+void mod(stack_t **stack, unsigned int line_no)
+{
+    if (*stack == NULL || (*stack)->next == NULL)
+    {
+        fprintf(stderr, "L%u: can't mod, stack too short\n", line_no);
+        exit(EXIT_FAILURE);
+    }
+
+    if ((*stack)->n == 0)
+    {
+        fprintf(stderr, "L%u: division by zero\n", line_no);
+        exit(EXIT_FAILURE);
+    }
+
+    (*stack)->next->n %= (*stack)->n;
     pop(stack, line_no);
 }

@@ -76,7 +76,7 @@ void pint(stack_t **stack, unsigned int line_no)
 /**
  * main - launcher
  * Return: 0
- */
+ *
 int main(void)
 {
 	unsigned int line_no;
@@ -125,4 +125,49 @@ int main(void)
 		line_no++;
 	}
 	return 0;
+}*/
+int main(void)
+{
+	stack_t *stack = NULL;
+    unsigned int line_no = 1;
+
+    /* Example usage of the opcodes */
+
+    /* Push 10 onto stack */
+    push(&stack, 10);
+
+    /* Push 5 onto stack */
+    push(&stack, 5);
+
+    /* Add the top two elements of the stack */
+    add(&stack, line_no++);
+
+    /* Print the result */
+    printf("Result: %d\n", stack->n);
+
+    /* Swap the top two elements of the stack */
+    swap(&stack, line_no++);
+
+    /* Print the swapped elements */
+    printf("Swapped elements: %d and %d\n", stack->n, stack->next->n);
+
+    /* Divide the top element by the second top element */
+    div_me(&stack, line_no++);
+
+    /* Print the division result */
+    printf("Division result: %d\n", stack->n);
+
+    /* Perform modulus operation */
+    mod(&stack, line_no++);
+
+    /* Print the final result */
+    printf("Final result: %d\n", stack->n);
+
+    /* Pop remaining elements from the stack */
+    while (stack != NULL)
+    {
+        pop(&stack, line_no++);
+    }
+
+    return 0;
 }
