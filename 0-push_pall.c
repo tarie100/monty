@@ -1,6 +1,5 @@
 #include"monty.h"
 #define STACK_SIZE 1024
-stack_t *stack = NULL; 
 /**
  * push - inserts a value into the stack
  * @stack: the stack
@@ -53,7 +52,8 @@ void pint(stack_t **stack, unsigned int line_no)
 	}
 	printf("%d\n", (*stack)->n);
 }
-/*void pop(stack_t **stack, unsigned int line_no)
+/**
+ * void pop(stack_t **stack, unsigned int line_no)
 {
         stack_t *temp;
 
@@ -75,100 +75,39 @@ void pint(stack_t **stack, unsigned int line_no)
 }*/
 /**
  * main - launcher
- * Return: 0
- *
-int main(void)
-{
-	unsigned int line_no;
-	int i;
-	instruction_t instruction_set[] = {
-		{"push", push},
-		{"pall", pall},
-		{"pint", pint},
-		{"pop", pop},
-		{"add", add},
-		{"swap", swap},
-		{"div", div_me},
-		{NULL, NULL}
-	};
-	line_no = 1;
-	for (i = 0; instruction_set[i].opcode != NULL; i++)
-	{
-		if (strcmp(instruction_set[i].opcode, "push") == 0)
-		{
-			instruction_set[i].f(&stack, line_no);
-		}
-		else if (strcmp(instruction_set[i].opcode, "pall") == 0)
-		{
-			instruction_set[i].f(&stack, line_no);
-		}
-		else if (strcmp(instruction_set[i].opcode, "pint") == 0)
-		{
-			instruction_set[i].f(&stack, line_no);
-		}
-		else if (strcmp(instruction_set[i].opcode, "pop") == 0)
-		{
-                        instruction_set[i].f(&stack, line_no);
-		}
-		else if (strcmp(instruction_set[i].opcode, "add") == 0)
-		{
-                        instruction_set[i].f(&stack, line_no);
-		}
-		else if (strcmp(instruction_set[i].opcode, "swap") == 0)
-		{
-                        instruction_set[i].f(&stack, line_no);
-		}
-		else if (strcmp(instruction_set[i].opcode, "div") == 0)
-		{
-                        instruction_set[i].f(&stack, line_no);
-		}
-		line_no++;
-	}
-	return 0;
-}*/
+ */
 int main(void)
 {
 	stack_t *temp, *stack = NULL;
-    unsigned int line_no = 1;
-
-        push(&stack, 10);
-
-    push(&stack, 5);
-
-    add(&stack, line_no++);
-
-    printf("Result: %d\n", stack->n);
-
-    swap(&stack, line_no++);
-
-    printf("Swapped elements: %d and %d\n", stack->n, stack->next->n);
-
-    div_me(&stack, line_no++);
-
-    printf("Division result: %d\n", stack->n);
-
-    mod(&stack, line_no++);
-
-    printf("Final result: %d\n", stack->n);
-    nop(&stack, line_no++);
-    rotl(&stack, line_no++);
-    printf("Rotated stack: ");
-    temp = stack;
-    while (temp != NULL)
-    {
-        printf("%d ", temp->n);
-        temp = temp->next;
-    }
-    printf("\n");
-    mul(&stack, line_no++);
-    printf("Multiplication result: %d\n", stack->n);
-    sub(&stack, line_no++);
-    printf("Subtraction result: %d\n", stack->n);
-
-    while (stack != NULL)
-    {
-        pop(&stack, line_no++);
-    }
-
-    return 0;
+	unsigned int line_no = 1;
+	
+	push(&stack, 10);
+	push(&stack, 5);
+	add(&stack, line_no++);
+	printf("Result: %d\n", stack->n);
+	swap(&stack, line_no++);
+	printf("Swapped elements: %d and %d\n", stack->n, stack->next->n);
+	div_me(&stack, line_no++);
+	printf("Division result: %d\n", stack->n);
+	mod(&stack, line_no++);
+	printf("Final result: %d\n", stack->n);
+	nop(&stack, line_no++);
+	rotl(&stack, line_no++);
+	printf("Rotated stack: ");
+	temp = stack;
+	while (temp != NULL)
+	{
+		printf("%d ", temp->n);
+		temp = temp->next;
+	}
+	printf("\n");
+	mul(&stack, line_no++);
+	printf("Multiplication result: %d\n", stack->n);
+	sub(&stack, line_no++);
+	printf("Subtraction result: %d\n", stack->n);
+	while (stack != NULL)
+	{
+		pop(&stack, line_no++);
+	}
+	return (0);
 }
