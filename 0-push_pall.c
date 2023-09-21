@@ -65,6 +65,10 @@ int main(void)
 		{"push", push},
 		{"pall", pall},
 		{"pint", pint},
+		{"pop", pop},
+		{"add", add},
+		{"swap", swap},
+		{"div", div_me},
 		{NULL, NULL}
 	};
 	line_no = 1;
@@ -81,6 +85,22 @@ int main(void)
 		else if (strcmp(instruction_set[i].opcode, "pint") == 0)
 		{
 			instruction_set[i].f(&stack, line_no);
+		}
+		else if (strcmp(instruction_set[i].opcode, "pop") == 0)
+		{
+                        instruction_set[i].f(&stack, line_no);
+		}
+		else if (strcmp(instruction_set[i].opcode, "add") == 0)
+		{
+                        instruction_set[i].f(&stack, line_no);
+		}
+		else if (strcmp(instruction_set[i].opcode, "swap") == 0)
+		{
+                        instruction_set[i].f(&stack, line_no);
+		}
+		else if (strcmp(instruction_set[i].opcode, "div") == 0)
+		{
+                        instruction_set[i].f(&stack, line_no);
 		}
 		line_no++;
 	}
